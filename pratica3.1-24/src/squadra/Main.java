@@ -46,6 +46,13 @@ public class Main {
                         indexInseriti = aggGioc(squadra, indexInseriti, gioc, gol, isCapitano);
                     }
                     break;
+                    case 1:
+                    if(indexInseriti==0)
+                        System.out.println("Nessun componente ancora inserito");
+                    else{
+                        System.out.println(stampa(squadra,indexInseriti));
+                    }
+                    break;
 
                 case 7:
                     System.out.println("Ciao");
