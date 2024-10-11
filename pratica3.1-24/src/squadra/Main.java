@@ -148,7 +148,7 @@ public class Main {
                             System.out.println("C'è gia un capitano");
                         }
                         System.out.println("Capitano:");
-                        System.out.println("Nome: "+squadra[i].getNome()+"\t Capitano:"+squadra[i].isCapitano()+"\t Gol:"+squadra[i].getGoal());
+                        System.out.println("Nome: "+squadra[controllaCapitani(squadra,indexInseriti)].getNome()+"\t Capitano:"+squadra[controllaCapitani(squadra,indexInseriti)].isCapitano()+"\t Gol:"+squadra[controllaCapitani(squadra,indexInseriti)].getGoal());
                     }
                     break;
                 case 7:
@@ -170,7 +170,7 @@ public class Main {
         for (int i=0;i<indexInseriti;i++){
             s=s+"Nome: "+squadra[i].getNome()+"\t Capitano:"+squadra[i].isCapitano()+"\t Gol:"+squadra[i].getGoal();
         }
-        s=s+"----------";
+        s=s+"\n----------";
         return s;
     }
 
@@ -203,7 +203,7 @@ public class Main {
         }
         return s;
     }
-    
+
     public static int controllaCapitani(Giocatore[] squadra, int indexInseriti) {
         for (int i = 0; i < indexInseriti; i++) {
             if (squadra[i].isCapitano())
