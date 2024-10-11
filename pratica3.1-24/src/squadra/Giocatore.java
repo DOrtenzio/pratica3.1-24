@@ -21,43 +21,44 @@ public class Giocatore {
 
     //Costruttori
     public Giocatore(){
-        this.nome=null;
-        this.capitano=false;
+        setNome(null);
+        setCapitano(false);
         setGoal(0);
     }
     public Giocatore(String nome){
-        this.nome=nome;
-        this.capitano=false;
+        setNome(nome);
+        setCapitano(false);
         setGoal(0);
     }
     public Giocatore(boolean capitano){
-        this.nome=null;
-        this.capitano=capitano;
+        setNome(null);
+        setCapitano(capitano);
         setGoal(0);
     }
     public Giocatore(int goal){
-        nome=null;
-        capitano=false;
+        setNome(null);
+        setCapitano(false);
         setGoal(goal);
     }
     public Giocatore(String nome, boolean capitano){
-        this.nome=nome;
-        this.capitano=capitano;
+        setNome(nome);
+        setCapitano(capitano);
         setGoal(0);
     }
     public Giocatore(String nome, int goal){
-        this.nome=nome;
-        capitano=false;
+        setNome(nome);
+        setCapitano(false);
         setGoal(goal);
     }
     public Giocatore(boolean capitano, int goal){
-        nome=null;
-        this.capitano=capitano;
+        setNome(null);
+        setCapitano(capitano);
         setGoal(goal);
     }
     public Giocatore(String nome,boolean capitano, int goal){
-        this.nome=nome;
-        this.capitano=capitano;
+        setNome(nome);
+        setCapitano(capitano);
         setGoal(goal);
     }
 }
+
