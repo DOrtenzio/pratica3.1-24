@@ -17,21 +17,21 @@ public class HelloController {
     @FXML
     private VBox insertBox;
 
-
-
     @FXML
     public void inserisciGioc() {
-        if (indexInseriti == squadra.length)
-            labelIn.setText("Impossibile inserire un nuovo giocatore: squadra al completo");
-        else {
+        insertBox.getChildren().clear();
+        if (indexInseriti == squadra.length) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE: Impossibile inserire un nuovo giocatore, squadra al completo (22/22)");
+        } else {
             boolean isCapitano;
-            labelIn.setText("Aggiunta:");
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("AGGIUNTA GIOCATORE");
 
-            insertBox.getChildren().clear();
             //Label e textField
-            Label l1=new Label("Inserire nome giocatore:");
+            Label l1=new Label("Inserire il nome nome giocatore:");
             TextField t1=new TextField();
-            Label l2=new Label("Inserire gol giocatore:");
+            Label l2=new Label("Inserire i gol  effettuati dal giocatore:");
             TextField t2=new TextField();
 
             //Li metto nella schermata
@@ -40,9 +40,9 @@ public class HelloController {
             insertBox.getChildren().add(l2);
             insertBox.getChildren().add(t2);
 
-            //Inserimento valori
+            //Inserimento capitano solo se capitano non è già presente
             if (indexInseriti == 0 || Function.controllaCapitani(squadra, indexInseriti) == -1) {
-                Label l3=new Label("E' capitano?");
+                Label l3=new Label("Sara' il tuo prossimo capitano? ");
                 insertBox.getChildren().add(l3);
                 CheckBox c1=new CheckBox("<--");
                 insertBox.getChildren().add(c1);
@@ -51,37 +51,41 @@ public class HelloController {
                 isCapitano = false;
             }
             //Bottone finale
-            Button b1=new Button("Invia");
+            Button b1=new Button("Inserisci");
             insertBox.getChildren().add(b1);
             b1.setOnMouseClicked( e -> { //All'azione
                 indexInseriti = Function.aggGioc(squadra, indexInseriti, t1.getText(), Integer.parseInt(t2.getText()), isCapitano);
                 insertBox.getChildren().clear();
-                labelIn.setText("Inserito");
+                labelIn.setText("INSERITO CORRETTAMENTE");
             });
         }
     }
     @FXML
     public void vediGioc() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore");
-        else {
-            insertBox.getChildren().clear();
-            labelIn.setText("Visione tutti giocatori:");
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("GIOCATORI DELLA SQUADRA:");
             Label l1=new Label(Function.stampa(squadra,indexInseriti));
             insertBox.getChildren().add(l1);
         }
     }
     @FXML
     public void modificaGioc() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore inserito");
-        else {
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
             //Ricerca giocatore
                 boolean isCapitano;
                 i=0;
-                labelIn.setText("Modifica:");
+                labelIn.setStyle("-fx-text-fill: #0a0a0a");
+                labelIn.setText("MODIFICA:");
 
-                insertBox.getChildren().clear();
                 //Label e textField
                 Label l1=new Label("Inserire nome giocatore:");
                 TextField t1=new TextField();
@@ -110,17 +114,20 @@ public class HelloController {
                 b1.setOnMouseClicked( e -> { //All'azione
                      i= Function.ricercaGioc(squadra, indexInseriti, t1.getText(), Integer.parseInt(t2.getText()), isCapitano);
                 });
-                if (i==-1)
-                    labelIn.setText("Giocatore inesistente");
-                else {
+                if (i==-1) {
+                    insertBox.getChildren().clear();
+                    labelIn.setStyle("-fx-text-fill: #FB0008");
+                    labelIn.setText("GIOCATORE INESISTENTE");
+                } else {
                     boolean isCapitano2;
-                    labelIn.setText("Modifica:");
+                    labelIn.setStyle("-fx-text-fill: #0a0a0a");
+                    labelIn.setText("MODIFICA DEL GIOCATORE RICHIESTO:");
 
                     insertBox.getChildren().clear();
                     //Label e textField
-                    Label l11=new Label("Inserire nuovo nome giocatore:");
+                    Label l11=new Label("Inserire il nuovo nome del giocatore:");
                     TextField t11=new TextField();
-                    Label l21=new Label("Inserire nuovo numero di gol giocatore:");
+                    Label l21=new Label("Inserire il nuovo numero di gol del giocatore:");
                     TextField t21=new TextField();
 
                     //Li metto nella schermata
@@ -140,7 +147,7 @@ public class HelloController {
                         isCapitano2 = false;
                     }
                     //Bottone finale
-                    Button b2=new Button("Modifica");
+                    Button b2=new Button("Conferma");
                     insertBox.getChildren().add(b2);
                     b1.setOnMouseClicked( e -> { //All'azione
                         Function.modificaGioc(squadra, indexInseriti, t1.getText(), Integer.parseInt(t2.getText()), isCapitano2);
@@ -151,19 +158,22 @@ public class HelloController {
     }
     @FXML
     public void cancellaGiocatore() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore inserito");
-        else {
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
             //Ricerca giocatore
             boolean isCapitano;
             i=0;
-            labelIn.setText("Cancellazione:");
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("CANCELLAZIONE:");
 
             insertBox.getChildren().clear();
             //Label e textField
-            Label l1=new Label("Inserire nome giocatore:");
+            Label l1=new Label("Inserire il nome del giocatore:");
             TextField t1=new TextField();
-            Label l2=new Label("Inserire gol giocatore:");
+            Label l2=new Label("Inserire i gol del giocatore:");
             TextField t2=new TextField();
 
             //Li metto nella schermata
@@ -183,20 +193,23 @@ public class HelloController {
                 isCapitano = false;
             }
             //Bottone finale
-            Button b1=new Button("Ricerca");
+            Button b1=new Button("Cerca");
             insertBox.getChildren().add(b1);
             b1.setOnMouseClicked( e -> { //All'azione
                 i= Function.ricercaGioc(squadra, indexInseriti, t1.getText(), Integer.parseInt(t2.getText()), isCapitano);
             });
-            if (i==-1)
-                labelIn.setText("Giocatore inesistente");
-            else {
+            insertBox.getChildren().clear();
+            if (i==-1) {
+                insertBox.getChildren().clear();
+                labelIn.setStyle("-fx-text-fill: #FB0008");
+                labelIn.setText("GIOCATORE INESISTENTE");
+            } else {
+                labelIn.setStyle("-fx-text-fill: #0a0a0a");
                 labelIn.setText("Cancellazione:");
                 Function.cancellaGioc(squadra, indexInseriti, i);
 
-                insertBox.getChildren().clear();
                 //Label e textField
-                Label l11=new Label("Cancellato");
+                Label l11=new Label("CANCELLATO CORRETTAMENTE");
 
                 //Li metto nella schermata
                 insertBox.getChildren().add(l11);
@@ -205,21 +218,26 @@ public class HelloController {
     }
     @FXML
     public void vediGioc5Gol() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore");
-        else {
-            insertBox.getChildren().clear();
-            labelIn.setText("Visione tutti giocatori:");
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("GIOCATORI CON PIU' DI 5 GOL:");
             Label l1=new Label(Function.stampa5Gol(squadra,indexInseriti));
             insertBox.getChildren().add(l1);
         }
     }
     @FXML
     public void vediCapitano() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore");
-        else {
-            insertBox.getChildren().clear();
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("CONTROLLO CAPITANI:");
             Label l1=new Label();
             insertBox.getChildren().add(l1);
             i=Function.controllaCapitani(squadra,indexInseriti);
@@ -231,10 +249,13 @@ public class HelloController {
     }
     @FXML
     public void capitanoCasuale() {
-        if (indexInseriti == 0)
-            labelIn.setText("Impossibile nessun giocatore");
-        else {
-            insertBox.getChildren().clear();
+        insertBox.getChildren().clear();
+        if (indexInseriti == 0) {
+            labelIn.setStyle("-fx-text-fill: #FB0008");
+            labelIn.setText("ERRORE : Nessun giocatore ancora inserito.");
+        } else {
+            labelIn.setStyle("-fx-text-fill: #0a0a0a");
+            labelIn.setText("CAPITANO CASUALE");
             Label l1=new Label();
             insertBox.getChildren().add(l1);
             Label l2=new Label();
