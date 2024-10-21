@@ -205,7 +205,7 @@ public class HelloController {
                 } else {
                     labelIn.setStyle("-fx-text-fill: #0a0a0a");
                     labelIn.setText("Cancellazione:");
-                    Function.cancellaGioc(squadra, indexInseriti, i);
+                    Function.cancellaGioc(squadra, i,indexInseriti);
                     indexInseriti--;
                     //Label e textField
                     Label l11=new Label("CANCELLATO CORRETTAMENTE");
