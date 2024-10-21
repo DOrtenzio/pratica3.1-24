@@ -10,7 +10,7 @@ public class Function {
     public static String stampa(Giocatore[] squadra, int indexInseriti){
         String s="Squadra: \n";
         for (int i=0;i<indexInseriti;i++){
-            s=s+"Nome: "+squadra[i].getNome()+"\t Capitano:"+squadra[i].isCapitano()+"\t Gol:"+squadra[i].getGoal();
+            s=s+"\nNome: "+squadra[i].getNome()+"\t Capitano:"+squadra[i].isCapitano()+"\t Gol:"+squadra[i].getGoal();
         }
         s=s+"\n----------";
         return s;
@@ -30,11 +30,10 @@ public class Function {
         squadra[indice].setCapitano(capitano);
     }
 
-    public static int cancellaGioc(Giocatore[] squadra, int indice, int indexInseriti){
+    public static void cancellaGioc(Giocatore[] squadra, int indice, int indexInseriti){
         for (int l=indice;l<indexInseriti-1;l++){
             squadra[l]=squadra[l+1];
         }
-        return indexInseriti-1;
     }
 
     public static String stampa5Gol(Giocatore[] squadra, int indexInseriti){
