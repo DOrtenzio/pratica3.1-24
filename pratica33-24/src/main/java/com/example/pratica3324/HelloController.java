@@ -183,7 +183,7 @@ public class HelloController {
             insertBox.getChildren().add(t2);
 
             //Inserimento valori
-            if (indexInseriti == 0 || Function.controllaCapitani(squadra, indexInseriti) == -1) {
+            if (Function.controllaCapitani(squadra, indexInseriti) == -1) {
                 Label l3=new Label("E' capitano?");
                 insertBox.getChildren().add(l3);
                 CheckBox c1=new CheckBox("<--");
@@ -197,23 +197,23 @@ public class HelloController {
             insertBox.getChildren().add(b1);
             b1.setOnMouseClicked( e -> { //All'azione
                 i= Function.ricercaGioc(squadra, indexInseriti, t1.getText(), Integer.parseInt(t2.getText()), isCapitano);
-            });
-            insertBox.getChildren().clear();
-            if (i==-1) {
                 insertBox.getChildren().clear();
-                labelIn.setStyle("-fx-text-fill: #FB0008");
-                labelIn.setText("GIOCATORE INESISTENTE");
-            } else {
-                labelIn.setStyle("-fx-text-fill: #0a0a0a");
-                labelIn.setText("Cancellazione:");
-                Function.cancellaGioc(squadra, indexInseriti, i);
+                if (i==-1) {
+                    insertBox.getChildren().clear();
+                    labelIn.setStyle("-fx-text-fill: #FB0008");
+                    labelIn.setText("GIOCATORE INESISTENTE");
+                } else {
+                    labelIn.setStyle("-fx-text-fill: #0a0a0a");
+                    labelIn.setText("Cancellazione:");
+                    Function.cancellaGioc(squadra, indexInseriti, i);
+                    indexInseriti--;
+                    //Label e textField
+                    Label l11=new Label("CANCELLATO CORRETTAMENTE");
 
-                //Label e textField
-                Label l11=new Label("CANCELLATO CORRETTAMENTE");
-
-                //Li metto nella schermata
-                insertBox.getChildren().add(l11);
-            }
+                    //Li metto nella schermata
+                    insertBox.getChildren().add(l11);
+                }
+            });
         }
     }
     @FXML
